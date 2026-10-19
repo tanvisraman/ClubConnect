@@ -1,0 +1,37 @@
+/**
+ * A funding opportunity (university, foundation, corporate, or government) that a
+ * {@link Club} might apply for.
+ *
+ * The grant-discovery agent ({@link Club#discoverGrants}) ranks grants against a
+ * club's profile, performs a lightweight eligibility check, and drafts an
+ * application starter — emitting the results as {@link MatchResult}s.
+ */
+entity type Grant {
+
+  /** Grant / program name. */
+  name: !string
+
+  /** Funding body, e.g. {@code "Wisconsin Alumni Association"}, {@code "NSF"}. */
+  source: string
+
+  /** Award amount in USD (use the ceiling for a range). */
+  amount: double
+
+  /** Application deadline. */
+  deadline: datetime
+
+  /** Free-text eligibility requirements. */
+  eligibility: string
+
+  /** Club categories/themes the grant favors, e.g. {@code ["Sustainability", "STEM"]}. */
+  targetCategories: [string]
+
+  /** Lifecycle status: {@code "open"}, {@code "upcoming"}, {@code "closed"}. */
+  status: string
+
+  /** Application URL. */
+  url: string
+
+  /** What the grant funds / sponsor intent. */
+  description: string
+}

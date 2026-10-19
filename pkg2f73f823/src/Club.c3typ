@@ -1,0 +1,108 @@
+/**
+ * A UW-Madison Registered Student Organization (RSO) drawn from the Wisconsin
+ * Involvement Network (WIN) directory.
+ *
+ * A {@link Club} is the sponsorship-seeking party in the outreach workflow: it
+ * authors {@link SponsorshipPacket}s ({@link Club#packets}) that are then run
+ * through the outreach agent as {@link OutreachCampaign}s.
+ */
+entity type Club {
+
+  /**
+   * Official organization name exactly as it appears in the WIN directory,
+   * e.g. {@code "Data Science For Sustainable Development - UW-Madison"}.
+   */
+  name: !string
+
+  /**
+   * WIN classification bucket the org is listed under, e.g.
+   * {@code "Wisconsin School of Business Undergrad RSOs"} or
+   * {@code "College of Engineering RSOs"}.
+   */
+  orgType: string
+
+  /**
+   * Free-text interest categories/tags from the WIN listing (often blank in the
+   * source feed).
+   */
+  category: string
+
+  /** Public website or WIN profile URL for the organization. */
+  website: string
+
+  /** The club's stated mission statement from its WIN profile. */
+  mission: string
+
+  /** The membership-benefits blurb from the club's WIN profile. */
+  membershipBenefits: string
+
+  /** Primary student-officer contact name, when known (not in the WIN feed). */
+  contactName: string
+
+  /** Primary contact email for sponsorship inquiries, when known. */
+  contactEmail: string
+
+  /**
+   * The club's core skills / competencies — the capabilities it can bring to a
+   * sponsor or partner, e.g. {@code ["Data Science", "Machine Learning",
+   * "Event Operations"]}. Surfaced on the company-rep view so a {@code CompanyRep}
+   * evaluating a {@link ClubSubmission} can see what the applying club is good at.
+   */
+  skills: [string]
+
+  /** The club's Instagram handle, including the leading {@code @}, e.g. {@code "@dssd_uw"}. */
+  instagramHandle: string
+
+  /** Public URL of the club's Instagram profile. */
+  instagramUrl: string
+
+  /** Approximate Instagram follower count, used in the social snapshot. */
+  instagramFollowers: int
+
+  /**
+   * Caption / summary of the club's most recent Instagram post, rendered as the
+   * visual Instagram snapshot on the club profile.
+   */
+  instagramLatestPost: string
+
+  /** Public URL of the club's LinkedIn page. */
+  linkedinUrl: string
+
+  /** Approximate LinkedIn follower count, used in the social snapshot. */
+  linkedinFollowers: int
+
+  /**
+   * Summary of the club's most recent LinkedIn post, rendered as the visual
+   * LinkedIn snapshot on the club profile.
+   */
+  linkedinLatestPost: string
+
+  /** Sponsorship packets this club has authored. Inverse of {@link SponsorshipPacket#club}. */
+  packets: [SponsorshipPacket](club)
+
+  /**
+   * Runs the connection agent: ranks the club's warm network (opted-in
+   * {@link AlumniContact}s and the {@link Company}s they work at) for a given
+   * {@code topic} — e.g. a speaker theme or partnership need — by
+   * {@link Affiliation#warmth} × topical relevance, using the platform LLM for
+   * the relevance judgment and rationale. Results are persisted as
+   * {@link MatchResult}s ({@code workflow = "connection"}).
+   *
+   * @param topic the need/theme to match the network against.
+   * @param maxResults maximum number of people/companies to return (defaults to 6 when null or &lt; 1).
+   * @return the ranked matches, highest {@link MatchResult#score} first.
+   */
+  findConnections: member function(topic: string, maxResults: int): [MatchResult] js
+
+  /**
+   * Runs the grant-discovery agent: ranks open {@link Grant}s against this club's
+   * profile (category, mission), performs a lightweight eligibility check, and
+   * drafts an application starter for each strong match, via the platform LLM.
+   * Results are persisted as {@link MatchResult}s ({@code workflow = "grant"}),
+   * with the eligibility verdict and draft starter in {@link MatchResult#extraJson}.
+   *
+   * @param maxResults maximum number of grants to return (defaults to 6 when null or &lt; 1).
+   * @return the ranked matches, highest {@link MatchResult#score} first.
+   */
+  discoverGrants: member function(maxResults: int): [MatchResult] js
+}

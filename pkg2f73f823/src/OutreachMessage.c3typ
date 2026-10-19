@@ -1,0 +1,59 @@
+/**
+ * A single ranked prospective sponsor within an {@link OutreachCampaign}, together
+ * with the LLM-drafted outreach email and its approval state.
+ *
+ * This is the human-in-the-loop unit: the agent produces it in {@code "draft"}
+ * status, a club officer reviews/edits it, {@link OutreachMessage#approve}s it, and
+ * finally {@link OutreachMessage#markSent}s it. Nothing leaves the building without
+ * an explicit approval step.
+ */
+entity type OutreachMessage {
+
+  /** The campaign this message belongs to. Inverse is {@link OutreachCampaign#messages}. */
+  campaign: !OutreachCampaign
+
+  /** The prospective sponsor this message targets. */
+  company: !Company
+
+  /** The alumnus providing the warm introduction into {@link OutreachMessage#company}, if any. */
+  warmIntroContact: AlumniContact
+
+  /** The sponsorship-pipeline prospect this email belongs to. Inverse of {@link SponsorProspect#messages}. */
+  prospect: SponsorProspect
+
+  /** Agent-assigned sponsorship-fit score, 0–100 (higher is a better fit). */
+  matchScore: double
+
+  /** One-to-two-sentence explanation of why this company scored as it did. */
+  matchRationale: string
+
+  /** Drafted email subject line. */
+  draftSubject: string
+
+  /** Drafted email body (editable by the reviewer before approval). */
+  draftBody: string
+
+  /** Approval state: {@code "draft"}, {@code "approved"}, {@code "sent"}, or {@code "skipped"}. */
+  status: string
+
+  /**
+   * Marks this draft as approved for sending. Sets {@link OutreachMessage#status}
+   * to {@code "approved"}, writes an {@link AuditLog} row attributing the approval
+   * to {@code approvedBy}, and returns the updated message.
+   *
+   * @param approvedBy email/identity of the human officer authorizing the send
+   *        (the human-in-the-loop gate). Defaults to {@code "club-officer"} when null.
+   */
+  approve: member function(approvedBy: string): OutreachMessage js
+
+  /**
+   * Records that the (approved) message has been sent. Sets
+   * {@link OutreachMessage#status} to {@code "sent"}, writes a CAN-SPAM-relevant
+   * {@link AuditLog} row, and returns the updated message. In this MVP sending is
+   * simulated — no live email is dispatched.
+   *
+   * @param sentBy email/identity of the human triggering the send. Defaults to
+   *        {@code "club-officer"} when null.
+   */
+  markSent: member function(sentBy: string): OutreachMessage js
+}

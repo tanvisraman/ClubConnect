@@ -1,0 +1,87 @@
+/**
+ * One prospective sponsor being actively pursued inside an {@link OutreachCampaign}
+ * — the row rendered in the Sponsorship Pipeline tracker.
+ *
+ * Where an {@link OutreachMessage} is a single drafted email, a {@link SponsorProspect}
+ * is the whole relationship: it can exist before any email is drafted (an officer adds
+ * a company to the pipeline by hand) and it carries the deal through its
+ * {@link SponsorProspect#stage} lifecycle ({@code prospect → contacted → replied →
+ * meeting → committed → declined}), the dollars ({@link SponsorProspect#askAmount} /
+ * {@link SponsorProspect#committedAmount}), ownership, and the next action owed. The
+ * outreach agent ({@link OutreachCampaign#generateDrafts}) seeds a prospect per ranked
+ * company, and each of that prospect's {@link SponsorProspect#messages} links back here.
+ */
+entity type SponsorProspect {
+
+  /** The prospective sponsor company this row tracks. */
+  company: !Company
+
+  /** The outreach campaign this prospect is being pursued under. */
+  campaign: OutreachCampaign
+
+  /** The company contact currently being worked (warm or direct). */
+  primaryContact: CompanyContact
+
+  /**
+   * Pipeline stage. One of {@code "prospect"}, {@code "contacted"}, {@code "replied"},
+   * {@code "meeting"}, {@code "committed"}, or {@code "declined"}. Advanced through
+   * {@link SponsorProspect#advanceStage} (or jumped straight to {@code "committed"} by
+   * {@link SponsorProspect#recordCommitment}).
+   */
+  stage: !string
+
+  /** Sponsorship tier being pitched, matched to a {@link SponsorshipPacket} tier (e.g. {@code "Gold"}). */
+  targetTier: string
+
+  /** Dollar amount being asked for. */
+  askAmount: double
+
+  /** Dollar amount actually committed by the sponsor (set once {@link SponsorProspect#stage} is {@code "committed"}). */
+  committedAmount: double
+
+  /** Email/name of the club officer who owns this row. */
+  owner: string
+
+  /** AI sponsorship-fit score, 0–100, carried over from {@link OutreachCampaign#generateDrafts} ranking. */
+  fitScore: double
+
+  /** One-to-two-sentence explanation of the {@link SponsorProspect#fitScore}. */
+  fitRationale: string
+
+  /** The next action owed on this prospect, e.g. {@code "Send follow-up"}, {@code "Schedule call"}. */
+  nextAction: string
+
+  /** When {@link SponsorProspect#nextAction} is due. Drives the "going cold / owed a follow-up" view. */
+  nextActionDate: datetime
+
+  /** When this prospect was last contacted. Stamped by {@link SponsorProspect#advanceStage}. */
+  lastTouchTimestamp: datetime
+
+  /** Free-text running log of calls, replies, and context. */
+  notes: string
+
+  /** The drafted/sent outreach emails for this prospect. Inverse of {@link OutreachMessage#prospect}. */
+  messages: [OutreachMessage](prospect)
+
+  /**
+   * Moves this prospect to {@code stage}, stamps {@link SponsorProspect#lastTouchTimestamp}
+   * to now, and writes an {@link AuditLog} row attributing the change to {@code by}.
+   *
+   * @param stage the destination pipeline stage ({@code prospect}/{@code contacted}/
+   *        {@code replied}/{@code meeting}/{@code committed}/{@code declined}).
+   * @param by email/identity of the officer making the change (defaults to {@code "club-officer"}).
+   * @return the updated prospect.
+   */
+  advanceStage: member function(stage: string, by: string): SponsorProspect js
+
+  /**
+   * Records a secured commitment: sets {@link SponsorProspect#stage} to {@code "committed"},
+   * writes {@code amount} to {@link SponsorProspect#committedAmount}, stamps
+   * {@link SponsorProspect#lastTouchTimestamp}, and writes an {@link AuditLog} row.
+   *
+   * @param amount the committed dollar amount.
+   * @param by email/identity of the officer recording the commitment (defaults to {@code "club-officer"}).
+   * @return the updated prospect.
+   */
+  recordCommitment: member function(amount: double, by: string): SponsorProspect js
+}

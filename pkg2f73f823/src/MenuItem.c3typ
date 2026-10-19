@@ -1,0 +1,27 @@
+/**
+ * A single priced offering within a {@link Menu} — the unit the vendor-sourcing
+ * agent uses to compute per-head price-fit against an {@link Event} budget.
+ */
+entity type MenuItem {
+
+  /** The menu this item belongs to. */
+  menu: !Menu
+
+  /** Item name, e.g. {@code "Build-Your-Own Taco Bar"}. */
+  name: !string
+
+  /** Item description / what's included. */
+  description: string
+
+  /** Category, e.g. {@code "Entree"}, {@code "Package"}, {@code "Dessert"}. */
+  category: string
+
+  /** Price per person in USD. */
+  pricePerPerson: double
+
+  /** Minimum number of orders/people required for this item. */
+  minimumOrder: int
+
+  /** Dietary tags, e.g. {@code ["Vegetarian", "Gluten-Free", "Halal"]}. */
+  dietaryTags: [string]
+}

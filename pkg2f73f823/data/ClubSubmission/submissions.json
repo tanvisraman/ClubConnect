@@ -1,0 +1,4 @@
+[
+  { "id": "sub_dssd_amazon", "request": { "id": "req_amazon_aws_workshop" }, "club": { "id": "club_data_science_for_sustainable_development_uw_madison" }, "pitch": "DSSD runs semester-long sustainability data projects with 80+ active members; an AWS workshop would plug directly into our datathon pipeline and reach a highly engaged technical audience.", "status": "submitted", "submittedTimestamp": "2026-10-12T15:30:00Z" },
+  { "id": "sub_badger_nm", "request": { "id": "req_nm_case_comp" }, "club": { "id": "club_badger_consulting" }, "pitch": "Badger Consulting has hosted three campus case competitions and can deliver a polished, well-attended event with faculty and alumni judges.", "status": "shortlisted", "submittedTimestamp": "2026-10-09T19:05:00Z" }
+]

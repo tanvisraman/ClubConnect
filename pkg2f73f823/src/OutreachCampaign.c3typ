@@ -1,0 +1,45 @@
+/**
+ * One run of the sponsorship-outreach agent against a {@link SponsorshipPacket}.
+ *
+ * The campaign is the unit the UI drives: the user creates it for a packet, then
+ * invokes {@link OutreachCampaign#generateDrafts} to have the platform LLM rank
+ * warm-intro-connected companies and draft an outreach email for each, producing
+ * {@link OutreachCampaign#messages}.
+ */
+entity type OutreachCampaign {
+
+  /** The packet being pitched. */
+  packet: !SponsorshipPacket
+
+  /** The sponsoring club (denormalized from {@link SponsorshipPacket#club} for convenience). */
+  club: Club
+
+  /** Display name for this campaign run. */
+  name: string
+
+  /**
+   * Lifecycle status: {@code "draft"} (not yet generated), {@code "generating"},
+   * {@code "ready"} (drafts produced, awaiting approval), or {@code "completed"}.
+   */
+  status: string
+
+  /** When the campaign was created. */
+  createdTimestamp: datetime
+
+  /** The ranked, drafted outreach messages. Inverse of {@link OutreachMessage#campaign}. */
+  messages: [OutreachMessage](campaign)
+
+  /**
+   * Runs the outreach agent: fetches every candidate {@link Company} with its
+   * warm-intro {@link AlumniContact}s, asks the platform LLM
+   * ({@code GenaiCore.Llm.Completion.Client}) to rank the best {@code maxCompanies}
+   * sponsorship fits for this campaign's packet and draft one outreach email per
+   * company (threading in the alumni connection), then persists the results as
+   * {@link OutreachMessage}s in {@code "draft"} status and flips this campaign to
+   * {@code "ready"}.
+   *
+   * @param maxCompanies maximum number of companies to rank/draft (defaults to 8 when null or &lt; 1).
+   * @return the created messages, highest {@link OutreachMessage#matchScore} first.
+   */
+  generateDrafts: member function(maxCompanies: int): [OutreachMessage] js
+}

@@ -1,0 +1,58 @@
+/**
+ * A club event that ties the three pillars together — a speaker (Connect), a
+ * sponsor (Fund), and a vendor (Operate) all hang off a {@link ClubEvent}.
+ *
+ * (Named {@code ClubEvent} rather than {@code Event} to avoid colliding with the
+ * platform's reserved {@code Event} type.)
+ *
+ * The vendor-sourcing agent ({@link ClubEvent#sourceVendors}) reads the event's
+ * {@link ClubEvent#headcount}, {@link ClubEvent#budget}, and {@link ClubEvent#cuisine}
+ * and ranks {@link ServiceProvider} menus by price-fit.
+ */
+entity type ClubEvent {
+
+  /** The club hosting the event. */
+  club: !Club
+
+  /** Event name, e.g. {@code "DSSD Fall Datathon Kickoff"}. */
+  name: !string
+
+  /** What the event is. */
+  description: string
+
+  /** When the event takes place. */
+  eventDate: datetime
+
+  /** Expected attendance (drives per-head catering math). */
+  headcount: int
+
+  /** Catering budget in USD. */
+  budget: double
+
+  /** Preferred cuisine, e.g. {@code "Pizza"}, {@code "Mexican"}, {@code "Any"}. */
+  cuisine: string
+
+  /** Lifecycle status: {@code "planning"}, {@code "booked"}, {@code "complete"}. */
+  status: string
+
+  /** Booked / invited speaker (from the alumni graph), if any. */
+  speaker: AlumniContact
+
+  /** Selected catering vendor, if chosen. */
+  vendor: ServiceProvider
+
+  /** Confirmed sponsor company, if any. */
+  sponsor: Company
+
+  /**
+   * Runs the vendor-sourcing agent: scores every {@link ServiceProvider} (with
+   * its {@link Menu}/{@link MenuItem}s) against this event's headcount, budget,
+   * and cuisine by price-fit, asks the platform LLM to rank the best
+   * {@code maxResults} options with an explanation, and persists the ranking as
+   * {@link MatchResult}s ({@code workflow = "vendor"}).
+   *
+   * @param maxResults maximum number of vendors to rank (defaults to 5 when null or &lt; 1).
+   * @return the ranked matches, highest {@link MatchResult#score} first.
+   */
+  sourceVendors: member function(maxResults: int): [MatchResult] js
+}

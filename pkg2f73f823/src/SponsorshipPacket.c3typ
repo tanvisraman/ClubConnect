@@ -1,0 +1,40 @@
+/**
+ * A club's sponsorship ask — the document the outreach agent reads to decide
+ * which {@link Company}s to approach and what to pitch them.
+ *
+ * A packet belongs to one {@link Club} and can be run through the agent any
+ * number of times as {@link OutreachCampaign}s ({@link SponsorshipPacket#campaigns}).
+ */
+entity type SponsorshipPacket {
+
+  /** The club offering the sponsorship opportunity. */
+  club: !Club
+
+  /** Human-facing packet title, e.g. {@code "DSSD 2026 Corporate Sponsorship Packet"}. */
+  title: !string
+
+  /** Narrative describing the club, its reach, and what sponsorship funds. */
+  description: string
+
+  /** Industries the club most wants to attract (matched against {@link Company#industry}). */
+  targetIndustries: [string]
+
+  /** Career-industry clusters the club most wants to attract (matched against {@link Company#careerCluster}). */
+  targetClusters: [string]
+
+  /**
+   * JSON-encoded list of sponsorship tiers and prices, e.g.
+   * {@code [{"tier":"Gold","price":5000,"benefits":"..."}]}. Stored as a string
+   * so tier shape can evolve without a schema change.
+   */
+  tiersJson: string
+
+  /** Optional URL to the uploaded packet PDF/slide deck. */
+  fileUrl: string
+
+  /** Fundraising target in dollars for this packet's campaign — drives the pipeline goal thermometer. */
+  goalAmount: double
+
+  /** Outreach campaigns run against this packet. Inverse of {@link OutreachCampaign#packet}. */
+  campaigns: [OutreachCampaign](packet)
+}

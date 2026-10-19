@@ -1,0 +1,5 @@
+[
+  { "id": "cc_amazon_ur", "company": { "id": "co_amazon" }, "name": "Dana Whitfield", "email": "dwhitfield@amazon.com", "title": "University Relations Lead", "isDecisionMaker": true },
+  { "id": "cc_nm_campus", "company": { "id": "co_northwestern_mutual" }, "name": "Greg Olsen", "email": "greg.olsen@northwesternmutual.com", "title": "Campus Recruiting Manager", "isDecisionMaker": true },
+  { "id": "cc_thermo_partnerships", "company": { "id": "co_thermo_fisher" }, "name": "Lena Fischer", "email": "lena.fischer@thermofisher.com", "title": "Academic Partnerships Manager", "isDecisionMaker": true }
+]

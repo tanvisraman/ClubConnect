@@ -1,0 +1,37 @@
+/**
+ * A need posted by a {@link Company} that clubs can respond to — the inbound
+ * complement to sponsorship outreach (e.g. "we want to host a case competition",
+ * "looking for a data-science club to pilot a tool").
+ *
+ * Clubs apply via {@link CompanyRequest#submissions}; a {@code CompanyRep} sees
+ * only their own company's requests and the submissions against them.
+ */
+entity type CompanyRequest {
+
+  /** The company posting the need. */
+  company: !Company
+
+  /** Short title of the opportunity. */
+  title: !string
+
+  /** Full description of what the company wants and what they offer. */
+  description: string
+
+  /** Kind of ask, e.g. {@code "Sponsorship"}, {@code "Speaker"}, {@code "Project"}, {@code "Recruiting"}. */
+  requestType: string
+
+  /** Club categories/interests the company is targeting. */
+  targetCategories: [string]
+
+  /** Budget or value attached to the opportunity, in USD. */
+  budget: double
+
+  /** Application deadline. */
+  deadline: datetime
+
+  /** Lifecycle status: {@code "open"}, {@code "reviewing"}, {@code "closed"}. */
+  status: string
+
+  /** Club applications to this request. Inverse of {@link ClubSubmission#request}. */
+  submissions: [ClubSubmission](request)
+}

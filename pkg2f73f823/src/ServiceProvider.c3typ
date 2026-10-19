@@ -1,0 +1,37 @@
+/**
+ * A caterer / restaurant / event-services vendor that clubs can book to
+ * **operate** an {@link Event}.
+ *
+ * Service providers publish one or more {@link ServiceProvider#menus}; the
+ * vendor-sourcing agent ({@link Event#sourceVendors}) ranks them against an
+ * event's headcount, budget, and cuisine preference by price-fit.
+ */
+entity type ServiceProvider {
+
+  /** Business name, e.g. {@code "Ian's Pizza"}. */
+  name: !string
+
+  /** Cuisine tags offered, e.g. {@code ["Pizza", "Italian", "Vegetarian"]}. */
+  cuisines: [string]
+
+  /** Geographic service area, e.g. {@code "Madison, WI"}. */
+  serviceArea: string
+
+  /** Relative price level, 1 ($) – 4 ($$$$). */
+  priceLevel: int
+
+  /** Minimum headcount the vendor will cater. */
+  minimumHeadcount: int
+
+  /** Vendor website / ordering URL. */
+  website: string
+
+  /** Short description of the vendor and its offering. */
+  description: string
+
+  /** Average review rating, 0–5. */
+  rating: double
+
+  /** Menus this vendor offers. Inverse of {@link Menu#serviceProvider}. */
+  menus: [Menu](serviceProvider)
+}

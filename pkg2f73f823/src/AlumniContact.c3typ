@@ -1,0 +1,63 @@
+/**
+ * A UW-Madison PEOPLE Program alumnus, mapped one-to-one from a row of the
+ * Airtable "PEOPLE Program Alumni Directory" export.
+ *
+ * Each alumnus is a potential warm-intro path to a prospective sponsor: when the
+ * outreach agent ranks a {@link Company}, it looks for an {@link AlumniContact}
+ * whose {@link AlumniContact#currentCompany} is that company and threads the
+ * connection into the drafted email.
+ */
+entity type AlumniContact {
+
+  /** Full name of the alumnus. */
+  name: !string
+
+  /** PEOPLE Program cohort, represented as the graduation year (e.g. {@code 2016}). */
+  peopleCohort: int
+
+  /** Degree earned, e.g. {@code "BS"}, {@code "BBA"}. */
+  education: string
+
+  /** Declared major(s). */
+  majors: [string]
+
+  /** Declared certificate(s)/minor(s). */
+  certificates: [string]
+
+  /** Current industries the alumnus works in (directory "Current Industries" column). */
+  currentIndustries: [string]
+
+  /**
+   * Career-industry cluster the alumnus falls under (directory "Career Industry
+   * Clusters" column), e.g. {@code "Technology, Data & Analytics"}.
+   */
+  careerCluster: string
+
+  /** Current job title, e.g. {@code "Software Engineer"}. */
+  positionTitle: string
+
+  /** Raw employer name exactly as written in the directory; resolved to {@link AlumniContact#currentCompany}. */
+  organizationName: string
+
+  /** LinkedIn profile URL. */
+  linkedInUrl: string
+
+  /** The resolved employer. Inverse is {@link Company#alumni}. */
+  currentCompany: Company
+
+  /**
+   * Whether this alumnus is likely a decision-maker for sponsorship (founder,
+   * director, or executive). Used to boost warm-intro strength.
+   */
+  isDecisionMaker: boolean
+
+  /** Rough seniority band: {@code "IC"}, {@code "Manager"}, {@code "Director"}, {@code "Executive"}. */
+  seniority: string
+
+  /**
+   * Consent state for outbound use of this person's data:
+   * {@code "opted_in"}, {@code "pending"}, or {@code "opted_out"}. Agents only
+   * surface {@code "opted_in"} contacts; this is the FERPA/compliance gate.
+   */
+  consentStatus: string
+}

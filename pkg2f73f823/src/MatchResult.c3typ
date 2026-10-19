@@ -1,0 +1,52 @@
+/**
+ * A single scored, explainable recommendation produced by one of the platform's
+ * agents (sponsorship, grant, vendor, or connection).
+ *
+ * {@link MatchResult} is the shared output currency of the agent layer: every
+ * agent ranks candidates and persists its reasoning here, so the UI can render a
+ * uniform "ranked + why + where-it-came-from" card regardless of which workflow
+ * produced it. Keeping provenance ({@link MatchResult#sourceType}/{@code sourceId}
+ * → {@link MatchResult#targetType}/{@code targetId} plus {@link MatchResult#provenance})
+ * on every row is what makes the graph auditable.
+ */
+entity type MatchResult {
+
+  /**
+   * Which agent workflow produced this match:
+   * {@code "sponsorship"}, {@code "grant"}, {@code "vendor"}, or {@code "connection"}.
+   */
+  workflow: !string
+
+  /** The entity the match was computed *for* (e.g. {@code "Club"}, {@code "Event"}). */
+  sourceType: string
+
+  /** Id of the {@link MatchResult#sourceType} entity. */
+  sourceId: string
+
+  /** The matched/recommended entity type (e.g. {@code "Company"}, {@code "Grant"}, {@code "ServiceProvider"}). */
+  targetType: string
+
+  /** Id of the recommended entity. */
+  targetId: string
+
+  /** Human-facing label of the recommended entity (denormalized for display). */
+  targetName: string
+
+  /** Fit score, 0–100 (higher is a better match). */
+  score: double
+
+  /** One-to-two-sentence natural-language explanation of the score. */
+  rationale: string
+
+  /**
+   * Data-lineage note: which attributes/edges the score was derived from (e.g.
+   * {@code "Affiliation warmth=0.9 via AlumniContact al_beeki_gurung; cluster match"}).
+   */
+  provenance: string
+
+  /** Optional JSON blob of workflow-specific extras (eligibility, price-fit, draft text). */
+  extraJson: string
+
+  /** When the agent produced this match. */
+  createdTimestamp: datetime
+}

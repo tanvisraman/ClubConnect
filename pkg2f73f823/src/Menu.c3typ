@@ -1,0 +1,18 @@
+/**
+ * A named menu / package offered by a {@link ServiceProvider}, grouping a set of
+ * priced {@link Menu#items}.
+ */
+entity type Menu {
+
+  /** The vendor that offers this menu. */
+  serviceProvider: !ServiceProvider
+
+  /** Menu name, e.g. {@code "Student Org Lunch Package"}. */
+  name: !string
+
+  /** What the menu is / who it suits. */
+  description: string
+
+  /** The priced line items on this menu. Inverse of {@link MenuItem#menu}. */
+  items: [MenuItem](menu)
+}

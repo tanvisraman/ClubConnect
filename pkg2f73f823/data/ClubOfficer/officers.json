@@ -1,0 +1,5 @@
+[
+  { "id": "off_dssd_president", "club": { "id": "club_data_science_for_sustainable_development_uw_madison" }, "name": "Priya Raman", "email": "praman@wisc.edu", "officerRole": "President", "term": "2025-2026" },
+  { "id": "off_dssd_sponsorship", "club": { "id": "club_data_science_for_sustainable_development_uw_madison" }, "name": "Marcus Lee", "email": "mlee27@wisc.edu", "officerRole": "Sponsorship Chair", "term": "2025-2026" },
+  { "id": "off_badger_president", "club": { "id": "club_badger_consulting" }, "name": "Hannah Schmidt", "email": "hschmidt3@wisc.edu", "officerRole": "President", "term": "2025-2026" }
+]

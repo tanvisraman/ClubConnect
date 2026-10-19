@@ -1,0 +1,33 @@
+/**
+ * An immutable record of a consequential action taken on the platform —
+ * especially outbound agent actions that cross the human-approval gate.
+ *
+ * Every time a draft is approved or a message is "sent", and every time an agent
+ * run completes, a row is written here capturing the acting user, the action,
+ * the affected entity, and (for gated actions) the human who approved it. This is
+ * the compliance backbone: CAN-SPAM accountability and provenance both read from
+ * this trail.
+ */
+entity type AuditLog {
+
+  /** Short action verb, e.g. {@code "approve"}, {@code "send"}, {@code "generateDrafts"}. */
+  action: !string
+
+  /** Id/email of the user (or {@code "system-agent"}) that performed the action. */
+  actor: string
+
+  /** The affected entity's type, e.g. {@code "OutreachMessage"}. */
+  targetType: string
+
+  /** The affected entity's id. */
+  targetId: string
+
+  /** For a gated outbound action, the human who authorized it. */
+  approvedBy: string
+
+  /** When the action occurred. */
+  timestamp: datetime
+
+  /** Free-text / JSON details about the action (recipient, subject, counts). */
+  details: string
+}

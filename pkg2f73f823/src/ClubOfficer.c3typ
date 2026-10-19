@@ -1,0 +1,21 @@
+/**
+ * A student officer of a {@link Club} — the human who drives the club's
+ * workflows and owns the approval gate on outbound actions.
+ */
+entity type ClubOfficer {
+
+  /** The club this officer serves. */
+  club: !Club
+
+  /** Officer's full name. */
+  name: !string
+
+  /** Contact email (used as the approving {@link AuditLog#actor}/{@code approvedBy}). */
+  email: string
+
+  /** Office held, e.g. {@code "President"}, {@code "VP Finance"}, {@code "Sponsorship Chair"}. */
+  officerRole: string
+
+  /** Term, e.g. {@code "2025-2026"}. */
+  term: string
+}

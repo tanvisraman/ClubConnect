@@ -1,0 +1,18 @@
+[
+  { "id": "mi_ians_classic", "menu": { "id": "menu_ians_group" }, "name": "Classic Pizza Spread", "description": "Assorted cheese, pepperoni, and veggie pies, ~3 slices per person.", "category": "Package", "pricePerPerson": 9.0, "minimumOrder": 10, "dietaryTags": ["Vegetarian"] },
+  { "id": "mi_ians_vegan", "menu": { "id": "menu_ians_group" }, "name": "Vegan Pizza Spread", "description": "Plant-based cheese and veggie pies.", "category": "Package", "pricePerPerson": 11.0, "minimumOrder": 10, "dietaryTags": ["Vegan", "Vegetarian"] },
+
+  { "id": "mi_ff_bbq", "menu": { "id": "menu_food_fight_buffet" }, "name": "BBQ Buffet", "description": "Smoked chicken and brisket, cornbread, slaw, and seasonal veg.", "category": "Entree", "pricePerPerson": 18.0, "minimumOrder": 25, "dietaryTags": [] },
+  { "id": "mi_ff_veg", "menu": { "id": "menu_food_fight_buffet" }, "name": "Vegetarian Buffet", "description": "Pasta primavera, roasted vegetables, and garden salad.", "category": "Entree", "pricePerPerson": 16.0, "minimumOrder": 25, "dietaryTags": ["Vegetarian"] },
+
+  { "id": "mi_med_platter", "menu": { "id": "menu_med_platters" }, "name": "Mezze Platter Spread", "description": "Shawarma, falafel, hummus, pita, and salads.", "category": "Package", "pricePerPerson": 12.0, "minimumOrder": 15, "dietaryTags": ["Halal", "Vegetarian"] },
+  { "id": "mi_med_vegan", "menu": { "id": "menu_med_platters" }, "name": "Vegan Mezze Platter", "description": "Falafel, hummus, tabbouleh, stuffed grape leaves.", "category": "Package", "pricePerPerson": 12.5, "minimumOrder": 15, "dietaryTags": ["Vegan", "Vegetarian", "Halal"] },
+
+  { "id": "mi_taco_bar", "menu": { "id": "menu_taqueria_bar" }, "name": "Taco Bar", "description": "Chicken, beef, and veggie fillings with rice, beans, and salsas.", "category": "Package", "pricePerPerson": 8.0, "minimumOrder": 10, "dietaryTags": ["Vegetarian"] },
+  { "id": "mi_burrito_bar", "menu": { "id": "menu_taqueria_bar" }, "name": "Burrito Bar", "description": "Build-your-own burritos with all the fixings.", "category": "Package", "pricePerPerson": 9.5, "minimumOrder": 10, "dietaryTags": ["Vegetarian"] },
+
+  { "id": "mi_swagat_buffet", "menu": { "id": "menu_swagat_buffet" }, "name": "Indian Buffet", "description": "Two curries, dal, rice, naan, and a vegetarian entree.", "category": "Entree", "pricePerPerson": 13.0, "minimumOrder": 15, "dietaryTags": ["Vegetarian", "Halal"] },
+  { "id": "mi_swagat_vegan", "menu": { "id": "menu_swagat_buffet" }, "name": "Vegan Indian Buffet", "description": "Chana masala, aloo gobi, dal, and rice.", "category": "Entree", "pricePerPerson": 13.0, "minimumOrder": 15, "dietaryTags": ["Vegan", "Vegetarian", "Halal"] },
+
+  { "id": "mi_short_stack_spread", "menu": { "id": "menu_short_stack_breakfast" }, "name": "Morning Spread", "description": "Egg scramble, hash, pancakes, fruit, and coffee.", "category": "Package", "pricePerPerson": 10.5, "minimumOrder": 20, "dietaryTags": ["Vegetarian"] }
+]

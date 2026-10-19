@@ -1,0 +1,33 @@
+/**
+ * An application user and the role + organization scope that governs what they
+ * can see and do. This is the RBAC anchor for the platform.
+ *
+ * Row-level visibility derives from {@link AppUser#role} together with
+ * {@link AppUser#orgType}/{@link AppUser#orgId}: a {@code CompanyRep} sees only
+ * their company's {@link CompanyRequest}s and {@link OutreachCampaign}s; a
+ * {@code ClubOfficer} sees only their club's data; alumni PII is further gated by
+ * each contact's consent status. In production these constraints are enforced by
+ * C3 access-control {@code ActionRule}s; here they are modeled as data and applied
+ * as fetch filters in the UI.
+ */
+entity type AppUser {
+
+  /** Display name. */
+  name: !string
+
+  /** Login email (also used as the {@link AuditLog#actor} identity). */
+  email: string
+
+  /**
+   * Platform role — one of {@code "PlatformAdmin"}, {@code "ClubOfficer"},
+   * {@code "ClubMember"}, {@code "CompanyRep"}, {@code "ServiceProviderRep"},
+   * {@code "AlumniUser"}.
+   */
+  role: !string
+
+  /** The kind of organization this user belongs to: {@code "Club"}, {@code "Company"}, or {@code "ServiceProvider"}. */
+  orgType: string
+
+  /** Id of the organization this user is scoped to (for row-level visibility). */
+  orgId: string
+}

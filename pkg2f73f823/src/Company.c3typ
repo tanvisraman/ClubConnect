@@ -1,0 +1,36 @@
+/**
+ * A prospective sponsor company. In this MVP the company universe is derived
+ * from the employers of UW-Madison PEOPLE Program alumni, so every
+ * {@link Company} carries a built-in warm-intro path via its {@link Company#alumni}.
+ *
+ * Companies are ranked against a {@link SponsorshipPacket} by the outreach agent
+ * ({@link OutreachCampaign#generateDrafts}).
+ */
+entity type Company {
+
+  /** Company name as it appears on the alumnus's directory record, e.g. {@code "Microsoft"}. */
+  name: !string
+
+  /** Primary industry, e.g. {@code "Technology"}, {@code "Financial Services"}. */
+  industry: string
+
+  /**
+   * Career-industry cluster this company maps to, aligned with the PEOPLE
+   * directory taxonomy (e.g. {@code "Technology, Data & Analytics"},
+   * {@code "Consulting/Finance/Management"}). Used to match against a packet's
+   * {@link SponsorshipPacket#targetClusters}.
+   */
+  careerCluster: string
+
+  /** Headquarters location, e.g. {@code "Redmond, WA"}. */
+  headquarters: string
+
+  /** Company website. */
+  website: string
+
+  /** Short description of what the company does. */
+  description: string
+
+  /** Alumni currently employed here — the warm-intro contacts. Inverse of {@link AlumniContact#currentCompany}. */
+  alumni: [AlumniContact](currentCompany)
+}

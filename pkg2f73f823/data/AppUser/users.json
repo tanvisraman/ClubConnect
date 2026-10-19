@@ -1,0 +1,8 @@
+[
+  { "id": "user_admin", "name": "Platform Admin", "email": "admin@clubhub.wisc.edu", "role": "PlatformAdmin", "orgType": "Platform", "orgId": "platform" },
+  { "id": "user_dssd_officer", "name": "Marcus Lee", "email": "mlee27@wisc.edu", "role": "ClubOfficer", "orgType": "Club", "orgId": "club_data_science_for_sustainable_development_uw_madison" },
+  { "id": "user_badger_officer", "name": "Hannah Schmidt", "email": "hschmidt3@wisc.edu", "role": "ClubOfficer", "orgType": "Club", "orgId": "club_badger_consulting" },
+  { "id": "user_amazon_rep", "name": "Dana Whitfield", "email": "dwhitfield@amazon.com", "role": "CompanyRep", "orgType": "Company", "orgId": "co_amazon" },
+  { "id": "user_ians_rep", "name": "Ian's Pizza Catering", "email": "catering@ianspizza.com", "role": "ServiceProviderRep", "orgType": "ServiceProvider", "orgId": "sp_ians_pizza" },
+  { "id": "user_alumni_beeki", "name": "Beeki Gurung", "email": "beeki.gurung@alumni.wisc.edu", "role": "AlumniUser", "orgType": "Company", "orgId": "co_amazon" }
+]

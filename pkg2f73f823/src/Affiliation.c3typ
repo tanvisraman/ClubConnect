@@ -1,0 +1,47 @@
+/**
+ * The crown-jewel edge of the graph: a typed, attributed relationship between a
+ * {@link AlumniContact} and a {@link Company}.
+ *
+ * Where {@link AlumniContact#currentCompany} is a bare pointer, an
+ * {@link Affiliation} carries the *strength and provenance* of the tie — how warm
+ * it is, whether the person can actually open doors, and whether we have consent
+ * to use it. The connection agent ({@link Club#findConnections}) ranks warm intros
+ * primarily off {@link Affiliation#warmth} × relevance, and the outreach agent
+ * prefers decision-maker affiliations.
+ */
+entity type Affiliation {
+
+  /** The person side of the edge. */
+  contact: !AlumniContact
+
+  /** The organization side of the edge. */
+  company: Company
+
+  /** The person's role at the org, e.g. {@code "Program Manager"}. */
+  role: string
+
+  /** Seniority band: {@code "IC"}, {@code "Manager"}, {@code "Director"}, {@code "Executive"}. */
+  seniority: string
+
+  /**
+   * Warmth of the tie, 0.0 (cold) – 1.0 (very warm) — a function of recency of
+   * contact, strength of the club relationship, and willingness to help.
+   */
+  warmth: double
+
+  /** Whether this person can influence/approve a sponsorship or partnership. */
+  isDecisionMaker: boolean
+
+  /**
+   * Consent state for using this person's data for outreach:
+   * {@code "opted_in"}, {@code "pending"}, or {@code "opted_out"}. Only
+   * {@code "opted_in"} affiliations may be surfaced to outbound workflows.
+   */
+  consentStatus: string
+
+  /** Where the affiliation came from, e.g. {@code "PEOPLE alumni directory (opt-in)"}. */
+  source: string
+
+  /** Year the person started at the org (for tenure/recency weighting). */
+  tenureStartYear: int
+}

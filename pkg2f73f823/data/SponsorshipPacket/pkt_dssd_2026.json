@@ -1,0 +1,13 @@
+[
+  {
+    "id": "pkt_dssd_2026",
+    "club": { "id": "club_data_science_for_sustainable_development_uw_madison" },
+    "title": "DSSD 2026 Corporate Sponsorship Packet",
+    "description": "Data Science For Sustainable Development (DSSD) at UW-Madison is a 120-member student organization that builds pro-bono data-science solutions for nonprofits and runs a spring Datathon drawing 300+ students. Sponsorship funds project compute, our speaker series, and the Datathon, and gives partners direct access to a pipeline of analytics, statistics, and engineering talent through branded workshops, resume books, and recruiting sessions.",
+    "targetIndustries": ["Technology", "Financial Services", "Life Sciences", "Consumer Goods", "Manufacturing & Agriculture"],
+    "targetClusters": ["Technology, Data & Analytics", "Consulting/Finance/Management", "Scientific Research & Development", "Engineering"],
+    "tiersJson": "[{\"tier\":\"Gold\",\"price\":5000,\"benefits\":\"Datathon title sponsor, logo on all materials, 2 recruiting sessions, resume book, keynote slot\"},{\"tier\":\"Silver\",\"price\":2500,\"benefits\":\"Logo placement, 1 recruiting session, resume book, workshop slot\"},{\"tier\":\"Bronze\",\"price\":1000,\"benefits\":\"Logo placement, resume book access\"}]",
+    "fileUrl": "",
+    "goalAmount": 25000
+  }
+]

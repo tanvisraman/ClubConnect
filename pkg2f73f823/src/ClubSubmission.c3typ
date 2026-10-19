@@ -1,0 +1,20 @@
+/**
+ * A club's application to a {@link CompanyRequest}.
+ */
+entity type ClubSubmission {
+
+  /** The company request being applied to. */
+  request: !CompanyRequest
+
+  /** The applying club. */
+  club: !Club
+
+  /** The club's pitch / why they're a fit. */
+  pitch: string
+
+  /** Lifecycle status: {@code "submitted"}, {@code "shortlisted"}, {@code "accepted"}, {@code "declined"}. */
+  status: string
+
+  /** When the submission was made. */
+  submittedTimestamp: datetime
+}

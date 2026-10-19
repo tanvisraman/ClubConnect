@@ -1,0 +1,22 @@
+/**
+ * A point of contact at a {@link Company} — the partnerships/recruiting person a
+ * club ultimately reaches, whether warm-introduced by an {@link AlumniContact} or
+ * approached directly.
+ */
+entity type CompanyContact {
+
+  /** The company this person works for. */
+  company: !Company
+
+  /** Contact's full name. */
+  name: !string
+
+  /** Contact email. */
+  email: string
+
+  /** Job title, e.g. {@code "University Relations Lead"}. */
+  title: string
+
+  /** Whether this contact can approve a sponsorship/partnership. */
+  isDecisionMaker: boolean
+}

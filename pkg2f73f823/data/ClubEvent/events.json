@@ -1,0 +1,4 @@
+[
+  { "id": "evt_dssd_datathon_2026", "club": { "id": "club_data_science_for_sustainable_development_uw_madison" }, "name": "DSSD Fall Datathon Kickoff", "description": "Day-long datathon kickoff: lunch, a keynote from an alumni data scientist, and team formation for the semester's sustainability projects.", "eventDate": "2026-11-14T11:00:00Z", "headcount": 80, "budget": 800.0, "cuisine": "Pizza", "status": "planning" },
+  { "id": "evt_badger_networking_2026", "club": { "id": "club_badger_consulting" }, "name": "Badger Consulting Networking Night", "description": "Evening networking mixer with alumni consultants and recruiters; light dinner served.", "eventDate": "2026-11-20T18:00:00Z", "headcount": 40, "budget": 600.0, "cuisine": "Mediterranean", "status": "planning" }
+]

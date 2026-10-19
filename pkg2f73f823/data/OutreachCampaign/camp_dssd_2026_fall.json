@@ -1,0 +1,10 @@
+[
+  {
+    "id": "camp_dssd_2026_fall",
+    "packet": { "id": "pkt_dssd_2026" },
+    "club": { "id": "club_data_science_for_sustainable_development_uw_madison" },
+    "name": "DSSD 2026 Fall Outreach",
+    "status": "draft",
+    "createdTimestamp": "2026-09-01T12:00:00Z"
+  }
+]

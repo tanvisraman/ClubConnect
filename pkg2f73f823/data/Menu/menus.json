@@ -1,0 +1,8 @@
+[
+  { "id": "menu_ians_group", "serviceProvider": { "id": "sp_ians_pizza" }, "name": "Group Pizza Package", "description": "Whole-pie catering with mix-and-match slices; vegetarian and vegan pies available." },
+  { "id": "menu_food_fight_buffet", "serviceProvider": { "id": "sp_food_fight" }, "name": "Signature Buffet", "description": "Chef-attended buffet with entree, sides, and salad; plated upgrade available." },
+  { "id": "menu_med_platters", "serviceProvider": { "id": "sp_mediterranean_cafe" }, "name": "Mezze & Platters", "description": "Shawarma, falafel, and mezze platters; halal and vegan sets." },
+  { "id": "menu_taqueria_bar", "serviceProvider": { "id": "sp_taqueria_guadalajara" }, "name": "Build-Your-Own Taco Bar", "description": "Self-serve taco and burrito bar with proteins, rice, beans, and salsas." },
+  { "id": "menu_swagat_buffet", "serviceProvider": { "id": "sp_swagat_indian" }, "name": "Indian Buffet", "description": "Rotating curries, rice, naan, and vegetarian/vegan entrees." },
+  { "id": "menu_short_stack_breakfast", "serviceProvider": { "id": "sp_short_stack" }, "name": "Morning Spread", "description": "Scramble, hash, pancakes, fruit, and coffee for morning events." }
+]
